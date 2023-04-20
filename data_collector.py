@@ -11,12 +11,9 @@ class DataCollector:
         self.data = bytearray()
         self.data_lock = threading.Lock()
         self.detector_client = detector_client.DetectorClient()
-        self.tmp_file_name = "tmp.wav"
         self.test = 5
 
     def add_data(self, data: bytearray):
-        print('Received data')
-
         try:
             self.data_lock.acquire()
             self.data += data
