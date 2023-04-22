@@ -1,6 +1,7 @@
 import socket
 import threading
 import data_collector
+import logging
 
 
 class TcpServer:
@@ -32,10 +33,10 @@ class TcpServer:
             try:
                 if not self.client_socket:
                     self.client_socket, client_address = self.server_socket.accept()
-                    self.client_socket.settimeout(5.0)
+                    self.client_socket.settimeout(10.0)
                     print(f"Connected by {client_address}")
             except socket.timeout:
-                print("no client")
+                logging.info("no client")
 
     def _recv_data(self):
         while True:
@@ -50,11 +51,18 @@ class TcpServer:
                 except socket.timeout:
                     # No data received from client within timeout period, reset client
                     self.client_socket = None
-                    print("\nno data received timeout.")
+                    logging.info("\nno data received timeout.")
                 except ConnectionResetError:
-                    print("\nConnection with client reset.")
+                    logging.info("\nConnection with client reset.")
                     self.client_socket = None
 
+
+# Set up logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 if __name__ == "__main__":
     server = TcpServer()
