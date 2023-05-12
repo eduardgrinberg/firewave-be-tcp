@@ -43,7 +43,6 @@ class TcpServer:
             if self.client_socket:  # find function to see if there is incoming data
                 try:
                     data = self.client_socket.recv(1024)
-                    # print('Received data ' + len(data).__str__())
                     if not data:
                         break
                     self.data_collector.add_data(data)

@@ -7,6 +7,7 @@ import logging
 class DetectorClient:
     def __init__(self):
         self.detector_url = "http://3.66.152.172:5000/upload"
+        # self.detector_url = "http://localhost:5000/upload"
 
 
     def send_data(self,data: bytearray):

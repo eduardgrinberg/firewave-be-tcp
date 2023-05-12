@@ -15,6 +15,7 @@ class DataCollector:
 
     def add_data(self, data: bytearray):
         try:
+            # logging.debug(f'Received data {len(data)}. Total data {len(self.data)}')
             self.data_lock.acquire()
             self.data += data
             if len(self.data) >= self.segment_lengths_bytes:
