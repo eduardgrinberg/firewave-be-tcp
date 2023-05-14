@@ -9,7 +9,7 @@ import wave
 import os
 
 class TCPServer:
-    def __init__(self, host = "192.168.105.95", port = 65432, timeout=1):
+    def __init__(self, host = "", port = 65432, timeout=1):
         self.host = host
         self.port = port
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

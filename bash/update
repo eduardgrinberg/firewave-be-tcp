@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo 'remove containers'
+
+docker stop tcp-server
+docker system prune -af
+
+echo 'clone code, build images and run containers'
+
+cd /home/ec2-user/
+rm -rf source
+git clone https://github.com/eduardgrinberg/firewave-be-tcp.git source
+docker image build -t nginx:latest source
+docker run -d --restart always --name tcp-server -p 6000:6000 tcp-server:latest
+
+echo 'updated successfully'
