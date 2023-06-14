@@ -10,7 +10,8 @@ class DetectorClient:
         # self.detector_url = "http://localhost:5000/upload"
 
 
-    def send_data(self,data: bytearray):
+    def send_data(self,data: bytearray, device_id):
+        logging.info('sending ' + str(device_id))
         file_obj = BytesIO(data)
         files = {'file_data': ('rec.raw', file_obj)}
         response = requests.post(self.detector_url, files=files)
